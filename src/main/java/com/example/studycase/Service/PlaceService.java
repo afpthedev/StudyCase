@@ -23,6 +23,16 @@ public class PlaceService {
         this.repository = repository;
     }
 
+    /**
+     * Returns a list of nearby places for the given location and radius.
+     * First, it checks if the result is already cached in the database.
+     * If not, it fetches the result from the Google Places API and caches
+     * the result in the database.
+     * @param longitude the longitude of the location
+     * @param latitude the latitude of the location
+     * @param radius the radius of the search
+     * @return a list of nearby places
+     */
     public List<Place> getNearbyPlaces(String longitude, String latitude, int radius) {
 
         List<Place> cachedPlaces = repository.findByLatitudeAndLongitudeAndRadius(latitude, longitude, radius);
