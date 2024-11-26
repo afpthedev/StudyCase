@@ -8,7 +8,7 @@ const containerStyle = {
 
 const Map = ({ places = [] }) => {
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, // API Key
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     });
 
     const { center, zoom } = useMemo(() => {
@@ -37,29 +37,20 @@ const Map = ({ places = [] }) => {
         const lats = validPlaces.map((p) => parseFloat(p.latitude));
         const lngs = validPlaces.map((p) => parseFloat(p.longitude));
 
-        const minLat = Math.min(...lats);
-        const maxLat = Math.max(...lats);
-        const minLng = Math.min(...lngs);
-        const maxLng = Math.max(...lngs);
-
         return {
             center: {
-                lat: (minLat + maxLat) / 2,
-                lng: (minLng + maxLng) / 2,
+                lat: (Math.min(...lats) + Math.max(...lats)) / 2,
+                lng: (Math.min(...lngs) + Math.max(...lngs)) / 2,
             },
             zoom: validPlaces.length > 5 ? 8 : 10,
         };
     }, [places]);
 
-    if (!isLoaded) return <div>Loading...</div>;
+    if (!isLoaded) return <div className="loading">Loading...</div>;
     if (places.length === 0) return <div>No locations to display</div>;
 
     return (
-        <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={zoom}
-        >
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={zoom}>
             {places.map((place, index) => (
                 <Marker
                     key={index}

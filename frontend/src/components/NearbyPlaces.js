@@ -32,11 +32,10 @@ const NearbyPlaces = ({ initialLocation, onUpdatePlaces }) => {
             });
 
             setPlaces(response.data);
-            onUpdatePlaces(response.data); // İşaretçileri App.js'e gönder
-            setError("");
+            onUpdatePlaces(response.data);
         } catch (error) {
             console.error("API Error:", error);
-            setError("Failed to fetch places. Please try again.");
+            setError("Failed to fetch places. Please check your input and try again.");
             setPlaces([]);
         } finally {
             setIsLoading(false);
