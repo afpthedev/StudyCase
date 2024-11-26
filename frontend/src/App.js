@@ -4,7 +4,7 @@ import Map from "./components/Map";
 
 function App() {
     const [quickLocations] = useState([
-        { name: "Istanbul", latitude: 41.0082, longitude: 28.9784 }, // İstanbul eklendi
+        { name: "Istanbul", latitude: 41.0082, longitude: 28.9784 }, // İstanbul ekledik.
         { name: "New York", latitude: 40.7128, longitude: -74.006 },
         { name: "London", latitude: 51.5074, longitude: -0.1278 },
         { name: "Tokyo", latitude: 35.6762, longitude: 139.6503 },
@@ -27,11 +27,11 @@ function App() {
         <div className="App flex">
             {/* Sol taraf: Quick Locations ve NearbyPlaces */}
             <div className="w-1/2 p-4">
-                <h1 className="text-2xl font-bold mb-4">Google Places API</h1>
+                <h1 className="text-2xl font-bold mb-4">Google Yerler API</h1>
 
                 {/* Quick Locations */}
                 <div className="mb-4">
-                    <h2 className="text-lg font-semibold">Quick Locations</h2>
+                    <h2 className="text-lg font-semibold">Hızlı Lokasyonlar</h2>
                     <div className="flex space-x-2">
                         {quickLocations.map((location) => (
                             <button

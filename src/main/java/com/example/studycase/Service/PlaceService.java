@@ -3,6 +3,8 @@ package com.example.studycase.Service;
 import com.example.studycase.DTO.PlaceDTO;
 import com.example.studycase.Entity.Place;
 import com.example.studycase.Repository.PlaceRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +15,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Getter
+@Setter
 public class PlaceService {
     private final PlaceRepository repository;
 
@@ -23,16 +27,7 @@ public class PlaceService {
         this.repository = repository;
     }
 
-    /**
-     * Returns a list of nearby places for the given location and radius.
-     * First, it checks if the result is already cached in the database.
-     * If not, it fetches the result from the Google Places API and caches
-     * the result in the database.
-     * @param longitude the longitude of the location
-     * @param latitude the latitude of the location
-     * @param radius the radius of the search
-     * @return a list of nearby places
-     */
+
     public List<Place> getNearbyPlaces(String longitude, String latitude, int radius) {
 
         List<Place> cachedPlaces = repository.findByLatitudeAndLongitudeAndRadius(latitude, longitude, radius);
