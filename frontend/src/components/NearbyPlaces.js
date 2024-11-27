@@ -19,26 +19,20 @@ const NearbyPlaces = ({ initialLocation, onUpdatePlaces }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
-        setIsLoading(true);
 
         try {
-            const response = await axios.get("http://localhost:8070/api/places", {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/places`, {
                 params: {
-                    longitude: parseFloat(longitude),
-                    latitude: parseFloat(latitude),
-                    radius: parseInt(radius),
+                    longitude,
+                    latitude,
+                    radius,
                 },
             });
-
             setPlaces(response.data);
-            onUpdatePlaces(response.data);
         } catch (error) {
             console.error("API Error:", error);
             setError("Failed to fetch places. Please check your input and try again.");
             setPlaces([]);
-        } finally {
-            setIsLoading(false);
         }
     };
 
